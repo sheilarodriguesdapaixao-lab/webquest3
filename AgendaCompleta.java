@@ -144,9 +144,12 @@ public class AgendaCompleta {
                 System.out.println("3. Remover Contato");
                 System.out.println("4. Listar Todos os Contatos");
                 System.out.println("5. Salvar em CSV");
-                System.out.println("6. Carregar Contatos de CSV");
-                System.out.println("7. Sair");
-                System.out.println("Escola a opçao:");
+                System.out.println("7. Listar Contatos Ordenados");
+                System.out.println("8. Buscar por Domínio de Email");
+                System.out.println("9. Sair");
+                System.out.print("Escolha a opção: ");
+
+
                 opcao = Integer.parseInt(scanner.nextLine());
                 scanner.nextLine();
 
@@ -205,9 +208,34 @@ public class AgendaCompleta {
                         break;
 
                     case 7:
+                       List<Contato> ordenados = agenda.listarContatosOrdenados();
+                       if (ordenados.isEmpty()) {
+                          System.out.println("Nenhum contato encontrado.");
+                       } else {
+                          System.out.println("Contatos ordenados por nome:");
+                      for (Contato c : ordenados) {
+                          System.out.println(c);
+                     }
+                  }
+                  break;
+
+                   case 8:
+                       System.out.print("Digite o domínio de email (ex: gmail.com): ");
+                       String dominio = scanner.nextLine();
+                       List<Contato> filtrados = agenda.buscarPorDominioEmail(dominio);
+                       if (filtrados.isEmpty()) {
+                          System.out.println("Nenhum contato com esse domínio.");
+                      } else {
+                        System.out.println("Contatos com domínio @" + dominio + ":");
+                        for (Contato c : filtrados) {
+                            System.out.println(c);
+                         }
+                 }
+                   break;
+                    
+                    case 9:
                         System.out.println("Encerrando o programa...");
                         break;
-
 
                    default:
                        System.out.println("Opção inválida. Tente novamente.");
